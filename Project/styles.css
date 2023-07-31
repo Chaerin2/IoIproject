@@ -1,0 +1,92 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    scroll-behavior: smooth; /* 스크롤 부드럽게 내리기 */
+  }
+  
+  .main-content {
+    text-align: center;
+  }
+  
+  .logo-container {
+    margin-top: 20px;
+  }
+  
+  .logo-image {
+    max-width: 100%;
+  }
+  
+  .site-intro {
+    margin-top: 20px;
+  }
+  
+  .site-intro h1 {
+    font-size: 36px;
+    color: #333;
+  }
+  
+  .site-intro p {
+    font-size: 20px;
+    color: #555;
+  }
+  
+  .search-box {
+    margin-top: 40px;
+  }
+  
+  .search-box form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .search-box input[type="text"] {
+    padding: 10px;
+    font-size: 18px;
+  }
+  
+  .search-box button {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .buttons-container {
+    display: flex;
+    justify-content: center; /* 가운데 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    margin-top: 40px;
+  }
+  
+  .buttons-container button {
+    flex: 1; /* 버튼이 가로 방향으로 균등하게 공간 차지 */
+    max-width: 300px; /* 최대 너비 지정 */
+    padding: 30px 60px; /* 크게 키움 */
+    font-size: 28px; /* 폰트 크기 크게 설정 */
+    background-color: #f44336;
+    color: #fff;
+    border: 2px solid #fff; /* 흰색 테두리 추가 */
+    cursor: pointer;
+    transition: background-color 0.3s; /* 배경색 변경 시 효과 적용 */
+  }
+
+  /* 버튼 호버 효과 추가 */
+.buttons-container button:hover {
+    background-color: #ff7043;
+  }
+  
+  footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  
