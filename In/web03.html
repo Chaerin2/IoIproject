@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web03</title>
+    <style>
+        /* 여기에 CSS 스타일을 추가하세요 */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        /* 추가적인 스타일은 여기에 */
+    </style>
+</head>
+<body>
+    <div id="weatherData">
+        <!-- 날씨 정보가 여기에 표시될 예정 -->
+    </div>
+
+    <div class="outfit-container">
+        <h2>오늘의 추천 옷</h2>
+        <div class="outfit-info">
+            <p><span id="temperature">a</span>도, 이런 날씨엔 <span id="prediction">b</span>, 이 어울립니다.</p>
+        </div>
+        <div class="outfit-image">
+            <img src="예시_이미지_링크" alt="추천 옷 이미지">
+            <p>사이즈: M</p>
+        </div>
+        <div class="outfit-description">
+            <p>옷에 대한 설명이 여기에 들어갑니다.</p>
+        </div>
+        <div class="outfit-actions">
+            <button id="searchAgain">다시 검색</button>
+            <a href="예시_구매_링크" target="_blank">구매하기</a>
+        </div>
+    </div>
+
+    <script>
+        // 로드시 날씨 정보 가져와서 표시
+        document.addEventListener('DOMContentLoaded', async () => {
+            const selectedCity = localStorage.getItem('selectedCity');
+            const apiKey = 'YOUR_OPENWEATHERMAP_API_KEY';
+            const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${selectedCity}&appid=${apiKey}&units=metric`;
+
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+                const temperature = data.main.temp;
+                const description = data.weather[0].description;
+
+                // 날씨 정보를 표시
+                const weatherDataElement = document.getElementById('weatherData');
+                const weatherHTML = `
+                    <h2>현재 날씨 정보</h2>
+                    <p>섭씨 ${temperature}도, ${description}</p>
+                `;
+                weatherDataElement.innerHTML = weatherHTML;
+            } catch (error) {
+                console.error('날씨 정보를 가져오는 중 에러가 발생했습니다:', error);
+            }
+
+            // 예측값과 추천 옷 정보를 가져와서 표시
+            const temperatureElement = document.getElementById('temperature');
+            const predictionElement = document.getElementById('prediction');
+
+            // 여기에 랜덤 포레스트 예측값과 추천 옷 정보를 가져와서 표시하는 로직을 추가하세요.
+            // const prediction = ...;
+            // const recommendedOutfit = ...;
+
+            temperatureElement.textContent = prediction.temperature; // a 대신 예측된 기온 값
+            predictionElement.textContent = prediction.weather;     // b 대신 예측된 날씨 정보
+
+            // 예시 이미지와 링크를 사용하세요.
+            const outfitImageElement = document.querySelector('.outfit-image img');
+            const outfitDescriptionElement = document.querySelector('.outfit-description p');
+            outfitImageElement.src = '예시_이미지_링크';
+            outfitImageElement.alt = '추천 옷 이미지';
+            outfitDescriptionElement.textContent = '옷에 대한 설명이 여기에 들어갑니다.';
+        });
+
+        // 다시 검색 버튼 클릭 시 동작
+        document.getElementById('searchAgain').addEventListener('click', () => {
+            // 검색 화면으로 이동
+            window.location.href = 'wed2.html';
+        });
+    </script>
+</body>
+</html>
