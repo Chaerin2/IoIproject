@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+    }
+
+    .search-container {
+        display: flex;
+        align-items: center;
+        margin: 10px 0;
+    }
+
+    .search-container label {
+        margin-right: 10px;
+    }
+
+    .search-container input {
+        width: 200px;
+        margin-right: 10px;
+        padding: 7px;
+    }
+
+    .search-container select {
+        width: 217.6px;
+        margin-right: 10px;
+        padding: 7px;
+    }
+
+    .search-button-container {
+        text-align: right;
+        margin-top: 15px;
+        padding: 0px 1.2%;
+    }
+
+    #searchButton {
+    font-size: 15px; /* 폰트 크기를 24px로 변경 */
+    padding: 7px 60px;
+}
+
+.checkbox-contrainer {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+    </style>
+</head>
+<body>
+
+    <div id="weatherData"></div>
+
+    <div class="search-container">
+        <label for="gender">성별</label>
+        <select id="gender">
+            <option value="남자">남자</option>
+            <option value="여자">여자</option>
+        </select>
+    </div>
+
+    <div class="search-container">
+        <label for="height">키</label>
+        <input id="height" type="number" placeholder="키를 입력하세요" min="0" step="1">
+    </div>
+
+    <div class="search-container">
+        <label for="weight">몸무게</label>
+        <input id="weight" type="number" placeholder="몸무게를 입력하세요" min="0" step="1">
+    </div>
+
+    <div class="search-container">
+        <label for="fit">핏</label>
+        <select id="fit">
+            <option value="적당함">적당함</option>
+            <option value="큼">큼</option>
+            <option value="작음">작음</option>
+        </select>
+    </div>
+
+    <div class="search-button-container">
+        <button id="searchButton">검색</button>
+    </div>
+
+    <div id="result"></div>
+
+    <script>
+
+        document.getElementById('searchButton').addEventListener('click', () => {
+            const gender = document.getElementById('gender').value;
+            const height = parseFloat(document.getElementById('height').value);
+            const weight = parseFloat(document.getElementById('weight').value);
+            const fit = document.getElementById('fit').value;
+            const Temperature = document.getElementById('T').innerHTML;
+
+                    // API 호출 및 모델 결과 받아오기
+            // const response = await fetch(`https://api.example.com/recommendation?clothingType=${clothingType}&gender=${gender}&height=${height}&weight=${weight}&fit=${fit}`);
+            // const data = await response.json();
+            
+            // 추천 사이트 표시
+            const resultElement = document.getElementById('result');
+            // const recommendedSites = data.recommendedSites;
+            const recommendedSites = '';
+            // const resultHtml = `
+            //     검색 결과: 옷 ${clothingType}, 성별 ${gender}, 키 ${height}, 몸무게 ${weight}, 핏 ${fit}에 맞는 사이트, 온도 ${Temperature}<br>
+            //     추천 사이트: ${recommendedSites.join(', ')}
+            // `;
+            const resultHtml = `
+                검색 결과: 성별 ${gender}, 키 ${Math.floor(height)}, 몸무게 ${Math.floor(weight)}, 핏 ${fit}에 맞는 사이트, ${Temperature}<br>
+                추천 사이트: ${recommendedSites}
+            `;
+            resultElement.innerHTML = resultHtml;
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            const selectedCity = localStorage.getItem('selectedCity');
+            const apiKey = 'ca3c57d21ef7591d018e467393935f00';
+            const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${selectedCity}&appid=${apiKey}&units=metric`;
+    
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const temperature = data.main.temp;
+                    const description = data.weather[0].description;
+                    const icon = data.weather[0].icon;
+    
+                    const imageUrl = 'https://img.freepik.com/free-photo/close-up-portrait-on-beautiful-cat_23-2149214373.jpg';
+
+                    const weatherHTML = `
+                        <h2>Current Weather in ${selectedCity}</h2>
+                        <p id="T">Temperature: ${temperature}°C</p>
+                        <p>Description: ${description}</p>
+                        <div class="image-container">
+                            <img src="${imageUrl}" alt="${description}">
+                        </div>
+                    `;
+
+                    const style = `
+                        .image-container {
+                            width: 80px;
+                            max-width: 80px;
+                            height: auto;
+                            border-radius: 10px; /* 10px 곡선으로 모서리를 둥글게 만듦 */
+                        }
+                    `;
+
+                    // 스타일을 <style> 태그로 추가해주는 코드
+                    const styleTag = document.createElement('style');
+                    styleTag.innerHTML = style;
+                    document.head.appendChild(styleTag);
+
+                    document.getElementById('weatherData').innerHTML = weatherHTML;
+                })
+                .catch(error => {
+                    console.error('Error fetching weather data:', error);
+                    document.getElementById('weatherData').innerText = 'Failed to fetch weather data';
+                });
+        });
+
+         document.getElementById('searchButton').addEventListener('click', () => {window.location.href = "web03.html";});
+
+
+    </script>
+
+<script src="script.js"></script>
+
+</body>
+</html>
