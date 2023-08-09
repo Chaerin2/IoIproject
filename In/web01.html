@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나의 온라인 쇼핑 메이트</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #333;
+            width: 90%;
+            text-align: center;
+        }
+
+        .intro-container {
+            width: 90%;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .slideshow {
+            width: 100%;
+            height: 300px;
+            background-color: #ddd;
+            position: relative;
+            margin-bottom: 10px;
+            overflow: hidden; /* 추가: 원형 이미지가 밖으로 나가는 것을 방지 */
+        }
+
+        .slideshow img {
+            width: 50%;
+            height: 50%;
+            position: absolute;
+            display: none;
+            left: 50%; /* 가로 중앙 정렬 */
+            top: 50%; /* 세로 중앙 정렬 */
+            transform: translate(-50%, -50%); /* 정확한 중앙 정렬을 위한 조정 */
+            border-radius: 50%; /* 이미지를 원형으로 만들기 위한 속성 */
+        }
+
+
+        .slideshow img.active {
+            display: block;
+        }
+
+        /* .site-description {
+            padding: 10px;
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 20px;
+        } */
+
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        label {
+            margin-right: 10px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        select {
+            padding: 6px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>나의 온라인 쇼핑 메이트</h1>
+    <div class="intro-container">
+        <div class="slideshow">
+            <img src="https://image.msscdn.net/images/goods_img/20230307/3129723/3129723_16823900179493_500.jpg" alt="Fashion Image 1" class="active">
+            <img src="https://image.msscdn.net/images/goods_img/20220225/2386335/2386335_2_500.jpg" alt="Fashion Image 2">
+            <img src="https://image.msscdn.net/images/goods_img/20220804/2699766/2699766_1_500.jpg" alt="Fashion Image 3">
+            <!-- Add more images if needed -->
+        </div>
+        <div class="site-description">
+            여기에 사이트의 간략한 소개를 작성하십시오.
+        </div>
+    </div>
+    <div class="container">
+        <div class="search-container">
+            <label for="citySelect">위치를 선택하세요</label>
+            <select id="citySelect">
+                <option value="Gwangju">Gwangju</option>
+                <option value="Seoul">Seoul</option>
+                <!-- Add more options if needed -->
+            </select>
+        </div>
+        <button id="startButton">시작하기</button>
+    </div>
+
+    <script>
+        document.getElementById('startButton').addEventListener('click', () => {
+            const selectedCity = document.getElementById('citySelect').value;
+            localStorage.setItem('selectedCity', selectedCity);
+            window.location.href = "web02.html";
+        });
+
+        // Slideshow logic
+        let activeIndex = 0;
+        const images = document.querySelectorAll('.slideshow img');
+        setInterval(() => {
+            images[activeIndex].classList.remove('active');
+            activeIndex = (activeIndex + 1) % images.length;
+            images[activeIndex].classList.add('active');
+        }, 3000);
+    </script>
+</body>
+
+</html>
