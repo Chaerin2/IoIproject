@@ -1,0 +1,65 @@
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.search-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 2px solid #007BFF; /* 파란색 테두리 */
+    border-radius: 20px; /* 둥근 모서리 */
+    padding: 10px 20px; /* 패딩 */
+}
+
+/* span 스타일 */
+.search-container span {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+/* select 박스 스타일 */
+#citySelect {
+    border: none; /* 테두리 제거 */
+    background-color: transparent; /* 배경색 제거 */
+    padding: auto;
+    text-align: center;
+    font-size: 1em; /* 폰트 크기 조정 */
+    outline: none;
+    /* appearance: none; 브라우저별 기본 스타일 제거 */
+    /* -webkit-appearance: none; */
+}
+
+/* 선택 시 select 박스 스타일 */
+#citySelect:focus {
+    border-color: transparent; 
+}
+
+/* select 박스 내부의 option 스타일 */
+#citySelect option {
+    padding: 5px 10px; 
+}
+#startButton {
+    padding: 12px 25px; /* 버튼의 패딩 */
+    border: none; /* 테두리 제거 */
+    border-radius: 10px; /* 둥근 모서리 */
+    background-color: #007BFF; /* 파란색 배경 */
+    color: white; /* 텍스트 색상 */
+    font-size: 16px; /* 텍스트 크기 */
+    font-weight: bold; /* 굵은 폰트 */
+    cursor: pointer; /* 마우스 오버 시 손가락 모양 */
+    transition: background-color 0.3s; /* 배경색 변환 효과 */
+}
+
+#startButton:hover {
+    background-color: #0056b3; /* 마우스 오버 시 배경색 변경 */
+}
+
+#startButton:active {
+    background-color: #004291; /* 버튼 클릭 시 배경색 변경 */
+}
